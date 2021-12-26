@@ -1,0 +1,94 @@
+﻿@model PagedList.IPagedList<CourseWork.Models.Search2_Result>
+
+@{
+    ViewBag.Title = "Index";
+}
+@using PagedList.Mvc;
+@using PagedList;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+
+<h2>Index</h2>
+
+<div class="form-horizontal">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().studentNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().fullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().groupCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().fathersSalary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().mothersSalary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().numFamMembers)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.studentNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.groupCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fathersSalary)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mothersSalary)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.numFamMembers)
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div>
+        @using (Html.BeginForm("Index", "RequestSec", FormMethod.Post))
+        {
+            <table>
+                <tr>
+                    <td><p>Group </p></td>
+                    <td>@Html.DropDownList("groupCode", ViewBag.Group as SelectList)</td>
+                </tr>
+                <tr>
+                    <td><p>Salary</p></td>
+                    <td><input type="text" name="avgSalary" /></td>
+                </tr>
+                <tr>
+                    <td>
+                        <br />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><input type="submit" value="Find" /></td>
+                    <td></td>
+                </tr>
+            </table>
+        }
+    </div>
+
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+new { page, SizePage = @Model.PageSize , lastCode = ViewBag.CurrentGroup, lastSalary = ViewBag.CurrentSalary }))
+</div>
+
+
+

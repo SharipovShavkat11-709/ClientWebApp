@@ -1,0 +1,575 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="studBDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Faculty">
+          <Key>
+            <PropertyRef Name="facultyName" />
+          </Key>
+          <Property Name="facultyName" Type="varchar" MaxLength="90" Nullable="false" />
+          <Property Name="fullNameOfDirector" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="groupCode" />
+          </Key>
+          <Property Name="groupCode" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="specialtyCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="yearAdmition" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Specialty">
+          <Key>
+            <PropertyRef Name="specialtyCode" />
+          </Key>
+          <Property Name="specialtyCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="facultyName" Type="varchar" MaxLength="90" />
+          <Property Name="qualification" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="studentNumber" />
+          </Key>
+          <Property Name="studentNumber" Type="int" Nullable="false" />
+          <Property Name="groupCode" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="fullName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="fathersSalary" Type="int" Nullable="false" />
+          <Property Name="mothersSalary" Type="int" Nullable="false" />
+          <Property Name="numFamMembers" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <Association Name="Group_fk0">
+          <End Role="Specialty" Type="Self.Specialty" Multiplicity="1" />
+          <End Role="Group" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialty">
+              <PropertyRef Name="specialtyCode" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="specialtyCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Specialty_fk0">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+          <End Role="Specialty" Type="Self.Specialty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="facultyName" />
+            </Principal>
+            <Dependent Role="Specialty">
+              <PropertyRef Name="facultyName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Student_fk0">
+          <End Role="Group" Type="Self.Group" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="groupCode" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="groupCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="addFaculty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="facultyName" Type="varchar" Mode="In" />
+          <Parameter Name="fullNameOfDirector" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="addGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="groupCode" Type="varchar" Mode="In" />
+          <Parameter Name="specialtyCode" Type="varchar" Mode="In" />
+          <Parameter Name="yearAdmition" Type="smallint" Mode="In" />
+        </Function>
+        <Function Name="addSpecialty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="specialtyCode" Type="varchar" Mode="In" />
+          <Parameter Name="facultyName" Type="varchar" Mode="In" />
+          <Parameter Name="qualification" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="addStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="studentNumber" Type="int" Mode="In" />
+          <Parameter Name="groupCode" Type="varchar" Mode="In" />
+          <Parameter Name="fullName" Type="varchar" Mode="In" />
+          <Parameter Name="fathersSalary" Type="int" Mode="In" />
+          <Parameter Name="mothersSalary" Type="int" Mode="In" />
+          <Parameter Name="numFamMembers" Type="tinyint" Mode="In" />
+        </Function>
+        <Function Name="deleteFaculty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="facultyName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="deleteGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="groupCode" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="deleteSpecialty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="specialtyCode" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="deleteStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="studentNumber" Type="int" Mode="In" />
+        </Function>
+        <Function Name="editFaculty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="facultyName" Type="varchar" Mode="In" />
+          <Parameter Name="fullNameOfDirector" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="editGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="groupCode" Type="varchar" Mode="In" />
+          <Parameter Name="specialtyCode" Type="varchar" Mode="In" />
+          <Parameter Name="yearAdmition" Type="smallint" Mode="In" />
+        </Function>
+        <Function Name="editSpecialty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="specialtyCode" Type="varchar" Mode="In" />
+          <Parameter Name="facultyName" Type="varchar" Mode="In" />
+          <Parameter Name="qualification" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="editStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="studentNumber" Type="int" Mode="In" />
+          <Parameter Name="groupCode" Type="varchar" Mode="In" />
+          <Parameter Name="fullName" Type="varchar" Mode="In" />
+          <Parameter Name="fathersSalary" Type="int" Mode="In" />
+          <Parameter Name="mothersSalary" Type="int" Mode="In" />
+          <Parameter Name="numFamMembers" Type="tinyint" Mode="In" />
+        </Function>
+        <Function Name="fillFaculty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fillGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fillSpecialty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fillStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Search1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Search1_1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Search2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="groupCode" Type="varchar" Mode="In" />
+          <Parameter Name="avgSalary" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Search2Web" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="groupCode" Type="varchar" Mode="In" />
+          <Parameter Name="avgSalary" Type="int" Mode="In" />
+        </Function>
+        <Function Name="showFaculty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="showGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="showSpecialty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="showStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="studBDModelStoreContainer">
+          <EntitySet Name="Faculty" EntityType="Self.Faculty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Specialty" EntityType="Self.Specialty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Group_fk0" Association="Self.Group_fk0">
+            <End Role="Specialty" EntitySet="Specialty" />
+            <End Role="Group" EntitySet="Group" />
+          </AssociationSet>
+          <AssociationSet Name="Specialty_fk0" Association="Self.Specialty_fk0">
+            <End Role="Faculty" EntitySet="Faculty" />
+            <End Role="Specialty" EntitySet="Specialty" />
+          </AssociationSet>
+          <AssociationSet Name="Student_fk0" Association="Self.Student_fk0">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="studBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Faculty">
+          <Key>
+            <PropertyRef Name="facultyName" />
+          </Key>
+          <Property Name="facultyName" Type="String" MaxLength="90" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fullNameOfDirector" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Specialty" Relationship="Self.Specialty_fk0" FromRole="Faculty" ToRole="Specialty" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="groupCode" />
+          </Key>
+          <Property Name="groupCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="specialtyCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="yearAdmition" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Specialty" Relationship="Self.Group_fk0" FromRole="Group" ToRole="Specialty" />
+          <NavigationProperty Name="Student" Relationship="Self.Student_fk0" FromRole="Group" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Specialty">
+          <Key>
+            <PropertyRef Name="specialtyCode" />
+          </Key>
+          <Property Name="specialtyCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="facultyName" Type="String" MaxLength="90" FixedLength="false" Unicode="false" />
+          <Property Name="qualification" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Faculty" Relationship="Self.Specialty_fk0" FromRole="Specialty" ToRole="Faculty" />
+          <NavigationProperty Name="Group" Relationship="Self.Group_fk0" FromRole="Specialty" ToRole="Group" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="studentNumber" />
+          </Key>
+          <Property Name="studentNumber" Type="Int32" Nullable="false" />
+          <Property Name="groupCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fullName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fathersSalary" Type="Int32" Nullable="false" />
+          <Property Name="mothersSalary" Type="Int32" Nullable="false" />
+          <Property Name="numFamMembers" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="Self.Student_fk0" FromRole="Student" ToRole="Group" />
+        </EntityType>
+        <Association Name="Specialty_fk0">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+          <End Role="Specialty" Type="Self.Specialty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="facultyName" />
+            </Principal>
+            <Dependent Role="Specialty">
+              <PropertyRef Name="facultyName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Group_fk0">
+          <End Role="Specialty" Type="Self.Specialty" Multiplicity="1" />
+          <End Role="Group" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialty">
+              <PropertyRef Name="specialtyCode" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="specialtyCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Student_fk0">
+          <End Role="Group" Type="Self.Group" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="groupCode" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="groupCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="studBDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Faculty" EntityType="Self.Faculty" />
+          <EntitySet Name="Group" EntityType="Self.Group" />
+          <EntitySet Name="Specialty" EntityType="Self.Specialty" />
+          <EntitySet Name="Student" EntityType="Self.Student" />
+          <AssociationSet Name="Specialty_fk0" Association="Self.Specialty_fk0">
+            <End Role="Faculty" EntitySet="Faculty" />
+            <End Role="Specialty" EntitySet="Specialty" />
+          </AssociationSet>
+          <AssociationSet Name="Group_fk0" Association="Self.Group_fk0">
+            <End Role="Specialty" EntitySet="Specialty" />
+            <End Role="Group" EntitySet="Group" />
+          </AssociationSet>
+          <AssociationSet Name="Student_fk0" Association="Self.Student_fk0">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <FunctionImport Name="addFaculty">
+            <Parameter Name="facultyName" Mode="In" Type="String" />
+            <Parameter Name="fullNameOfDirector" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="addGroup">
+            <Parameter Name="groupCode" Mode="In" Type="String" />
+            <Parameter Name="specialtyCode" Mode="In" Type="String" />
+            <Parameter Name="yearAdmition" Mode="In" Type="Int16" />
+          </FunctionImport>
+          <FunctionImport Name="addSpecialty">
+            <Parameter Name="specialtyCode" Mode="In" Type="String" />
+            <Parameter Name="facultyName" Mode="In" Type="String" />
+            <Parameter Name="qualification" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="addStudent">
+            <Parameter Name="studentNumber" Mode="In" Type="Int32" />
+            <Parameter Name="groupCode" Mode="In" Type="String" />
+            <Parameter Name="fullName" Mode="In" Type="String" />
+            <Parameter Name="fathersSalary" Mode="In" Type="Int32" />
+            <Parameter Name="mothersSalary" Mode="In" Type="Int32" />
+            <Parameter Name="numFamMembers" Mode="In" Type="Byte" />
+          </FunctionImport>
+          <FunctionImport Name="deleteFaculty">
+          <Parameter Name="facultyName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="deleteGroup">
+          <Parameter Name="groupCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="deleteSpecialty">
+          <Parameter Name="specialtyCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="deleteStudent">
+          <Parameter Name="studentNumber" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="editGroup">
+            <Parameter Name="groupCode" Mode="In" Type="String" />
+            <Parameter Name="specialtyCode" Mode="In" Type="String" />
+            <Parameter Name="yearAdmition" Mode="In" Type="Int16" />
+          </FunctionImport>
+          <FunctionImport Name="editSpecialty">
+            <Parameter Name="specialtyCode" Mode="In" Type="String" />
+            <Parameter Name="facultyName" Mode="In" Type="String" />
+            <Parameter Name="qualification" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="editStudent">
+            <Parameter Name="studentNumber" Mode="In" Type="Int32" />
+            <Parameter Name="groupCode" Mode="In" Type="String" />
+            <Parameter Name="fullName" Mode="In" Type="String" />
+            <Parameter Name="fathersSalary" Mode="In" Type="Int32" />
+            <Parameter Name="mothersSalary" Mode="In" Type="Int32" />
+            <Parameter Name="numFamMembers" Mode="In" Type="Byte" />
+          </FunctionImport>
+          <FunctionImport Name="fillFaculty">
+          <Parameter Name="i" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="fillGroup">
+          <Parameter Name="i" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="fillSpecialty">
+          <Parameter Name="i" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="fillStudent">
+          <Parameter Name="i" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Search1" ReturnType="Collection(studBDModel.Search1_Result)" />
+          <FunctionImport Name="Search1_1" ReturnType="Collection(studBDModel.Search1_1_Result)" />
+          <FunctionImport Name="Search2Web" ReturnType="Collection(studBDModel.Search2Web_Result)">
+            <Parameter Name="groupCode" Mode="In" Type="String" />
+            <Parameter Name="avgSalary" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="showFaculty" ReturnType="Collection(studBDModel.showFaculty_Result)" />
+          <FunctionImport Name="showGroup" ReturnType="Collection(studBDModel.showGroup_Result)" />
+          <FunctionImport Name="showSpecialty" ReturnType="Collection(studBDModel.showSpecialty_Result)" />
+          <FunctionImport Name="showStudent" ReturnType="Collection(studBDModel.showStudent_Result)" />
+          <FunctionImport Name="Search2" ReturnType="Collection(studBDModel.Search2_Result)">
+            <Parameter Name="groupCode" Mode="In" Type="String" />
+            <Parameter Name="avgSalary" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="editFaculty">
+            <Parameter Name="facultyName" Mode="In" Type="String" />
+            <Parameter Name="fullNameOfDirector" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="Search1_Result">
+          <Property Type="String" Name="fullName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="groupCode" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="specialtyCode" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="facultyName" Nullable="false" MaxLength="90" />
+        </ComplexType>
+        <ComplexType Name="Search1_1_Result">
+          <Property Type="String" Name="groupCode" Nullable="false" MaxLength="15" />
+          <Property Type="Int32" Name="avgSalary" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Search2Web_Result">
+          <Property Type="Int32" Name="studentNumber" Nullable="false" />
+          <Property Type="String" Name="groupCode" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="fullName" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="fathersSalary" Nullable="false" />
+          <Property Type="Int32" Name="mothersSalary" Nullable="false" />
+          <Property Type="Byte" Name="numFamMembers" Nullable="false" />
+          <Property Type="String" Name="groupCode1" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="specialtyCode" Nullable="false" MaxLength="10" />
+          <Property Type="Int16" Name="yearAdmition" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="showFaculty_Result">
+          <Property Type="String" Name="facultyName" Nullable="false" MaxLength="90" />
+          <Property Type="String" Name="fullNameOfDirector" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="showGroup_Result">
+          <Property Type="String" Name="groupCode" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="specialtyCode" Nullable="false" MaxLength="10" />
+          <Property Type="Int16" Name="yearAdmition" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="showSpecialty_Result">
+          <Property Type="String" Name="specialtyCode" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="facultyName" Nullable="true" MaxLength="90" />
+          <Property Type="String" Name="qualification" Nullable="false" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="showStudent_Result">
+          <Property Type="Int32" Name="studentNumber" Nullable="false" />
+          <Property Type="String" Name="groupCode" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="fullName" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="fathersSalary" Nullable="false" />
+          <Property Type="Int32" Name="mothersSalary" Nullable="false" />
+          <Property Type="Byte" Name="numFamMembers" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Search2_Result">
+          <Property Type="Int32" Name="studentNumber" Nullable="false" />
+          <Property Type="String" Name="groupCode" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="fullName" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="fathersSalary" Nullable="false" />
+          <Property Type="Int32" Name="mothersSalary" Nullable="false" />
+          <Property Type="Byte" Name="numFamMembers" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="studBDModelStoreContainer" CdmEntityContainer="studBDEntities">
+          <EntitySetMapping Name="Faculty">
+            <EntityTypeMapping TypeName="studBDModel.Faculty">
+              <MappingFragment StoreEntitySet="Faculty">
+                <ScalarProperty Name="facultyName" ColumnName="facultyName" />
+                <ScalarProperty Name="fullNameOfDirector" ColumnName="fullNameOfDirector" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Group">
+            <EntityTypeMapping TypeName="studBDModel.Group">
+              <MappingFragment StoreEntitySet="Group">
+                <ScalarProperty Name="groupCode" ColumnName="groupCode" />
+                <ScalarProperty Name="specialtyCode" ColumnName="specialtyCode" />
+                <ScalarProperty Name="yearAdmition" ColumnName="yearAdmition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Specialty">
+            <EntityTypeMapping TypeName="studBDModel.Specialty">
+              <MappingFragment StoreEntitySet="Specialty">
+                <ScalarProperty Name="specialtyCode" ColumnName="specialtyCode" />
+                <ScalarProperty Name="facultyName" ColumnName="facultyName" />
+                <ScalarProperty Name="qualification" ColumnName="qualification" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student">
+            <EntityTypeMapping TypeName="studBDModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="studentNumber" ColumnName="studentNumber" />
+                <ScalarProperty Name="groupCode" ColumnName="groupCode" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+                <ScalarProperty Name="fathersSalary" ColumnName="fathersSalary" />
+                <ScalarProperty Name="mothersSalary" ColumnName="mothersSalary" />
+                <ScalarProperty Name="numFamMembers" ColumnName="numFamMembers" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="addFaculty" FunctionName="studBDModel.Store.addFaculty" />
+          <FunctionImportMapping FunctionImportName="addGroup" FunctionName="studBDModel.Store.addGroup" />
+          <FunctionImportMapping FunctionImportName="addSpecialty" FunctionName="studBDModel.Store.addSpecialty" />
+          <FunctionImportMapping FunctionImportName="addStudent" FunctionName="studBDModel.Store.addStudent" />
+          <FunctionImportMapping FunctionImportName="deleteFaculty" FunctionName="studBDModel.Store.deleteFaculty" />
+          <FunctionImportMapping FunctionImportName="deleteGroup" FunctionName="studBDModel.Store.deleteGroup" />
+          <FunctionImportMapping FunctionImportName="deleteSpecialty" FunctionName="studBDModel.Store.deleteSpecialty" />
+          <FunctionImportMapping FunctionImportName="deleteStudent" FunctionName="studBDModel.Store.deleteStudent" />
+          <FunctionImportMapping FunctionImportName="editGroup" FunctionName="studBDModel.Store.editGroup" />
+          <FunctionImportMapping FunctionImportName="editSpecialty" FunctionName="studBDModel.Store.editSpecialty" />
+          <FunctionImportMapping FunctionImportName="editStudent" FunctionName="studBDModel.Store.editStudent" />
+          <FunctionImportMapping FunctionImportName="fillFaculty" FunctionName="studBDModel.Store.fillFaculty" />
+          <FunctionImportMapping FunctionImportName="fillGroup" FunctionName="studBDModel.Store.fillGroup" />
+          <FunctionImportMapping FunctionImportName="fillSpecialty" FunctionName="studBDModel.Store.fillSpecialty" />
+          <FunctionImportMapping FunctionImportName="fillStudent" FunctionName="studBDModel.Store.fillStudent" />
+          <FunctionImportMapping FunctionImportName="Search1" FunctionName="studBDModel.Store.Search1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="studBDModel.Search1_Result">
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+                <ScalarProperty Name="groupCode" ColumnName="groupCode" />
+                <ScalarProperty Name="specialtyCode" ColumnName="specialtyCode" />
+                <ScalarProperty Name="facultyName" ColumnName="facultyName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Search1_1" FunctionName="studBDModel.Store.Search1_1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="studBDModel.Search1_1_Result">
+                <ScalarProperty Name="groupCode" ColumnName="groupCode" />
+                <ScalarProperty Name="avgSalary" ColumnName="avgSalary" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Search2Web" FunctionName="studBDModel.Store.Search2Web">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="studBDModel.Search2Web_Result">
+                <ScalarProperty Name="studentNumber" ColumnName="studentNumber" />
+                <ScalarProperty Name="groupCode" ColumnName="groupCode" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+                <ScalarProperty Name="fathersSalary" ColumnName="fathersSalary" />
+                <ScalarProperty Name="mothersSalary" ColumnName="mothersSalary" />
+                <ScalarProperty Name="numFamMembers" ColumnName="numFamMembers" />
+                <ScalarProperty Name="groupCode1" ColumnName="groupCode1" />
+                <ScalarProperty Name="specialtyCode" ColumnName="specialtyCode" />
+                <ScalarProperty Name="yearAdmition" ColumnName="yearAdmition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="showFaculty" FunctionName="studBDModel.Store.showFaculty">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="studBDModel.showFaculty_Result">
+                <ScalarProperty Name="facultyName" ColumnName="facultyName" />
+                <ScalarProperty Name="fullNameOfDirector" ColumnName="fullNameOfDirector" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="showGroup" FunctionName="studBDModel.Store.showGroup">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="studBDModel.showGroup_Result">
+                <ScalarProperty Name="groupCode" ColumnName="groupCode" />
+                <ScalarProperty Name="specialtyCode" ColumnName="specialtyCode" />
+                <ScalarProperty Name="yearAdmition" ColumnName="yearAdmition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="showSpecialty" FunctionName="studBDModel.Store.showSpecialty">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="studBDModel.showSpecialty_Result">
+                <ScalarProperty Name="specialtyCode" ColumnName="specialtyCode" />
+                <ScalarProperty Name="facultyName" ColumnName="facultyName" />
+                <ScalarProperty Name="qualification" ColumnName="qualification" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="showStudent" FunctionName="studBDModel.Store.showStudent">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="studBDModel.showStudent_Result">
+                <ScalarProperty Name="studentNumber" ColumnName="studentNumber" />
+                <ScalarProperty Name="groupCode" ColumnName="groupCode" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+                <ScalarProperty Name="fathersSalary" ColumnName="fathersSalary" />
+                <ScalarProperty Name="mothersSalary" ColumnName="mothersSalary" />
+                <ScalarProperty Name="numFamMembers" ColumnName="numFamMembers" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Search2" FunctionName="studBDModel.Store.Search2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="studBDModel.Search2_Result">
+                <ScalarProperty Name="studentNumber" ColumnName="studentNumber" />
+                <ScalarProperty Name="groupCode" ColumnName="groupCode" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+                <ScalarProperty Name="fathersSalary" ColumnName="fathersSalary" />
+                <ScalarProperty Name="mothersSalary" ColumnName="mothersSalary" />
+                <ScalarProperty Name="numFamMembers" ColumnName="numFamMembers" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="editFaculty" FunctionName="studBDModel.Store.editFaculty" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

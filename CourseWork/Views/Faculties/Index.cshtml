@@ -1,0 +1,47 @@
+﻿@model PagedList.IPagedList<CourseWork.Models.Faculty>
+@using PagedList.Mvc;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Faculty</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            facultyName
+        </th>
+        <th>
+            fullNameOfDirector
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.facultyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fullNameOfDirector)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.facultyName }) |
+                @Html.ActionLink("Details", "Details", new { id = item.facultyName }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.facultyName })
+            </td>
+        </tr>
+    }
+
+</table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+

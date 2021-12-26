@@ -1,0 +1,68 @@
+﻿@model PagedList.IPagedList<CourseWork.Models.Student>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            studentNumber
+        </th>
+        <th>
+            groupCode
+        </th>
+        <th>
+            fullName
+        </th>
+        <th>
+            fathersSalary
+        </th>
+        <th>
+            mothersSalary
+        </th>
+        <th>
+            numFamMembers
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.studentNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Group.groupCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fathersSalary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mothersSalary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.numFamMembers)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.studentNumber }) |
+                @Html.ActionLink("Details", "Details", new { id = item.studentNumber }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.studentNumber })
+            </td>
+        </tr>
+    }
+</table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

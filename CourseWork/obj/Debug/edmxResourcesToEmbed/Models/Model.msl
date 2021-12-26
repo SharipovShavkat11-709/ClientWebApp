@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="studBDModelStoreContainer" CdmEntityContainer="studBDEntities">
+    <EntitySetMapping Name="Faculty">
+      <EntityTypeMapping TypeName="studBDModel.Faculty">
+        <MappingFragment StoreEntitySet="Faculty">
+          <ScalarProperty Name="facultyName" ColumnName="facultyName" />
+          <ScalarProperty Name="fullNameOfDirector" ColumnName="fullNameOfDirector" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Group">
+      <EntityTypeMapping TypeName="studBDModel.Group">
+        <MappingFragment StoreEntitySet="Group">
+          <ScalarProperty Name="groupCode" ColumnName="groupCode" />
+          <ScalarProperty Name="specialtyCode" ColumnName="specialtyCode" />
+          <ScalarProperty Name="yearAdmition" ColumnName="yearAdmition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Specialty">
+      <EntityTypeMapping TypeName="studBDModel.Specialty">
+        <MappingFragment StoreEntitySet="Specialty">
+          <ScalarProperty Name="specialtyCode" ColumnName="specialtyCode" />
+          <ScalarProperty Name="facultyName" ColumnName="facultyName" />
+          <ScalarProperty Name="qualification" ColumnName="qualification" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Student">
+      <EntityTypeMapping TypeName="studBDModel.Student">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="studentNumber" ColumnName="studentNumber" />
+          <ScalarProperty Name="groupCode" ColumnName="groupCode" />
+          <ScalarProperty Name="fullName" ColumnName="fullName" />
+          <ScalarProperty Name="fathersSalary" ColumnName="fathersSalary" />
+          <ScalarProperty Name="mothersSalary" ColumnName="mothersSalary" />
+          <ScalarProperty Name="numFamMembers" ColumnName="numFamMembers" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="addFaculty" FunctionName="studBDModel.Store.addFaculty" />
+    <FunctionImportMapping FunctionImportName="addGroup" FunctionName="studBDModel.Store.addGroup" />
+    <FunctionImportMapping FunctionImportName="addSpecialty" FunctionName="studBDModel.Store.addSpecialty" />
+    <FunctionImportMapping FunctionImportName="addStudent" FunctionName="studBDModel.Store.addStudent" />
+    <FunctionImportMapping FunctionImportName="deleteFaculty" FunctionName="studBDModel.Store.deleteFaculty" />
+    <FunctionImportMapping FunctionImportName="deleteGroup" FunctionName="studBDModel.Store.deleteGroup" />
+    <FunctionImportMapping FunctionImportName="deleteSpecialty" FunctionName="studBDModel.Store.deleteSpecialty" />
+    <FunctionImportMapping FunctionImportName="deleteStudent" FunctionName="studBDModel.Store.deleteStudent" />
+    <FunctionImportMapping FunctionImportName="editGroup" FunctionName="studBDModel.Store.editGroup" />
+    <FunctionImportMapping FunctionImportName="editSpecialty" FunctionName="studBDModel.Store.editSpecialty" />
+    <FunctionImportMapping FunctionImportName="editStudent" FunctionName="studBDModel.Store.editStudent" />
+    <FunctionImportMapping FunctionImportName="fillFaculty" FunctionName="studBDModel.Store.fillFaculty" />
+    <FunctionImportMapping FunctionImportName="fillGroup" FunctionName="studBDModel.Store.fillGroup" />
+    <FunctionImportMapping FunctionImportName="fillSpecialty" FunctionName="studBDModel.Store.fillSpecialty" />
+    <FunctionImportMapping FunctionImportName="fillStudent" FunctionName="studBDModel.Store.fillStudent" />
+    <FunctionImportMapping FunctionImportName="Search1" FunctionName="studBDModel.Store.Search1">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="studBDModel.Search1_Result">
+          <ScalarProperty Name="fullName" ColumnName="fullName" />
+          <ScalarProperty Name="groupCode" ColumnName="groupCode" />
+          <ScalarProperty Name="specialtyCode" ColumnName="specialtyCode" />
+          <ScalarProperty Name="facultyName" ColumnName="facultyName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Search1_1" FunctionName="studBDModel.Store.Search1_1">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="studBDModel.Search1_1_Result">
+          <ScalarProperty Name="groupCode" ColumnName="groupCode" />
+          <ScalarProperty Name="avgSalary" ColumnName="avgSalary" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Search2Web" FunctionName="studBDModel.Store.Search2Web">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="studBDModel.Search2Web_Result">
+          <ScalarProperty Name="studentNumber" ColumnName="studentNumber" />
+          <ScalarProperty Name="groupCode" ColumnName="groupCode" />
+          <ScalarProperty Name="fullName" ColumnName="fullName" />
+          <ScalarProperty Name="fathersSalary" ColumnName="fathersSalary" />
+          <ScalarProperty Name="mothersSalary" ColumnName="mothersSalary" />
+          <ScalarProperty Name="numFamMembers" ColumnName="numFamMembers" />
+          <ScalarProperty Name="groupCode1" ColumnName="groupCode1" />
+          <ScalarProperty Name="specialtyCode" ColumnName="specialtyCode" />
+          <ScalarProperty Name="yearAdmition" ColumnName="yearAdmition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="showFaculty" FunctionName="studBDModel.Store.showFaculty">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="studBDModel.showFaculty_Result">
+          <ScalarProperty Name="facultyName" ColumnName="facultyName" />
+          <ScalarProperty Name="fullNameOfDirector" ColumnName="fullNameOfDirector" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="showGroup" FunctionName="studBDModel.Store.showGroup">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="studBDModel.showGroup_Result">
+          <ScalarProperty Name="groupCode" ColumnName="groupCode" />
+          <ScalarProperty Name="specialtyCode" ColumnName="specialtyCode" />
+          <ScalarProperty Name="yearAdmition" ColumnName="yearAdmition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="showSpecialty" FunctionName="studBDModel.Store.showSpecialty">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="studBDModel.showSpecialty_Result">
+          <ScalarProperty Name="specialtyCode" ColumnName="specialtyCode" />
+          <ScalarProperty Name="facultyName" ColumnName="facultyName" />
+          <ScalarProperty Name="qualification" ColumnName="qualification" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="showStudent" FunctionName="studBDModel.Store.showStudent">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="studBDModel.showStudent_Result">
+          <ScalarProperty Name="studentNumber" ColumnName="studentNumber" />
+          <ScalarProperty Name="groupCode" ColumnName="groupCode" />
+          <ScalarProperty Name="fullName" ColumnName="fullName" />
+          <ScalarProperty Name="fathersSalary" ColumnName="fathersSalary" />
+          <ScalarProperty Name="mothersSalary" ColumnName="mothersSalary" />
+          <ScalarProperty Name="numFamMembers" ColumnName="numFamMembers" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Search2" FunctionName="studBDModel.Store.Search2">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="studBDModel.Search2_Result">
+          <ScalarProperty Name="studentNumber" ColumnName="studentNumber" />
+          <ScalarProperty Name="groupCode" ColumnName="groupCode" />
+          <ScalarProperty Name="fullName" ColumnName="fullName" />
+          <ScalarProperty Name="fathersSalary" ColumnName="fathersSalary" />
+          <ScalarProperty Name="mothersSalary" ColumnName="mothersSalary" />
+          <ScalarProperty Name="numFamMembers" ColumnName="numFamMembers" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="editFaculty" FunctionName="studBDModel.Store.editFaculty" />
+  </EntityContainerMapping>
+</Mapping>

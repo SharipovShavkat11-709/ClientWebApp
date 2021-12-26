@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Exception";
+}
+
+<h2>You can not delete this faculty while specialty with the same name exist</h2>
+@using (Html.BeginForm())
+{
+    <p>
+        @Html.Encode(ViewData["MessageEx"])
+    </p>
+}

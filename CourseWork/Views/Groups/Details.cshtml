@@ -1,0 +1,42 @@
+﻿@model CourseWork.Models.Group
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Group</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.groupCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.groupCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Specialty.specialtyCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Specialty.specialtyCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.yearAdmition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.yearAdmition)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.groupCode }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

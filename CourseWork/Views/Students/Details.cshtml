@@ -1,0 +1,65 @@
+﻿@model CourseWork.Models.Student
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Student</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.studentNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.studentNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Group.groupCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Group.groupCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fathersSalary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fathersSalary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mothersSalary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mothersSalary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numFamMembers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numFamMembers)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.studentNumber }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
